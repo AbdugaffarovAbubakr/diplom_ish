@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Kredit Risk Tizimi</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-top">
+        <h1>AI Kredit Risk Baholash Dashboard</h1>
+        <button type="button" id="toggleStatsBtn">Statistika</button>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h2>Ma'lumot kiritish</h2>
+          <form id="analyzeForm" class="form-grid">
+            <div class="field"><label>Yosh</label><input type="number" name="age" min="18" required /></div>
+            <div class="field"><label>Jinsi</label><select name="gender"><option value="male">Erkak</option><option value="female">Ayol</option></select></div>
+            <div class="field"><label>Oyiga daromad (UZS)</label><input type="number" name="monthlyIncome" min="0" required /></div>
+            <div class="field"><label>Oyiga xarajat (UZS)</label><input type="number" name="monthlyExpenses" min="0" required /></div>
+            <div class="field"><label>Ish holati</label><select name="jobStatus"><option value="stable">Barqaror</option><option value="unstable">Beqaror</option><option value="unemployed">Ishsiz</option></select></div>
+            <div class="field"><label>Ish turi</label><select name="jobType"><option value="low">Past</option><option value="medium" selected>O'rta</option><option value="high">Yuqori</option></select></div>
+            <div class="field"><label>Oilaviy holat</label><select name="maritalStatus"><option value="single">Bo'ydoq / Turmush qurmagan</option><option value="married">Turmush qurgan</option></select></div>
+            <div class="field"><label>Yashash turi</label><select name="livingType"><option value="withParents">Ota-ona bilan</option><option value="independent">Mustaqil</option></select></div>
+            <div class="field"><label>Uy qiymati (USD)</label><input type="number" name="houseValue" min="0" value="0" /></div>
+            <div class="field"><label>Avto qiymati (USD)</label><input type="number" name="carValue" min="0" value="0" /></div>
+            <div class="field"><label>Boshqa mulk (USD)</label><input type="number" name="otherAssets" min="0" value="0" /></div>
+            <div class="field"><label>So'ralgan kredit (UZS)</label><input type="number" name="requestedLoan" min="0" required /></div>
+            <div class="field"><label>Kredit muddati (oy)</label><input type="number" name="loanMonths" min="1" value="12" /></div>
+            <div class="field" style="justify-content: end"><button type="submit">Tahlil qilish</button></div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Natija</h2>
+          <div id="resultEmpty">Natija bu yerda chiqadi.</div>
+          <div id="resultBlock" style="display:none">
+            <div class="result-top">
+              <strong id="riskScore">0%</strong>
+              <span id="riskLevel" class="pill">medium</span>
+            </div>
+            <div class="stats">
+              <div class="stat"><div class="stat-title">Maksimal Kredit</div><div class="stat-value" id="maxLoan"></div></div>
+              <div class="stat"><div class="stat-title">Holat</div><div class="stat-value" id="status"></div></div>
+              <div class="stat"><div class="stat-title">Ishonchlilik</div><div class="stat-value" id="mcRepay"></div></div>
+              <div class="stat"><div class="stat-title">ML Ehtimol</div><div class="stat-value" id="mlRepay"></div></div>
+            </div>
+            <h3>Tavsiyalar</h3>
+            <ul id="recommendations"></ul>
+            <canvas id="riskChart" height="160" style="display: none"></canvas>
+            <h3>3 / 6 / 12 / 24 Oylik Kredit Tavsiyalari</h3>
+            <div id="loanRecommendations" class="recommendation-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px">
+        <div class="history-top" style="margin-bottom: 10px">
+          <h2 style="margin:0">Hisob-kitoblar tarixi</h2>
+          <button type="button" id="exportHistoryBtn">Excelga eksport</button>
+        </div>
+        <div id="historyList"></div>
+      </div>
+
+      <div class="card" style="margin-top:18px; display:none" id="statsSection">
+        <h2>Statistik Hisobotlar</h2>
+        <div class="stats-grid">
+          <div class="stats-chart-card">
+            <h3>Yosh Oralig'i</h3>
+            <canvas id="ageChart" height="220"></canvas>
+          </div>
+          <div class="stats-chart-card">
+            <h3>Jinsi Bo'yicha</h3>
+            <canvas id="genderChart" height="220"></canvas>
+          </div>
+          <div class="stats-chart-card">
+            <h3>Oilaviy Holat</h3>
+            <canvas id="maritalChart" height="220"></canvas>
+          </div>
+          <div class="stats-chart-card">
+            <h3>Kredit Muddati</h3>
+            <canvas id="loanMonthsChart" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
