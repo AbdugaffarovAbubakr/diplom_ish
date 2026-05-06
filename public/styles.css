@@ -62,6 +62,7 @@ h1 {
   margin: 0;
   font-size: clamp(26px, 3vw, 36px);
   letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 h2 {
@@ -78,6 +79,18 @@ h3 {
   margin: 8px 0 0;
   color: var(--muted);
   font-size: 14px;
+}
+
+body.dark .subtitle {
+  color: #c9d5e8;
+}
+
+body.dark h1 {
+  color: var(--accent-2);
+}
+
+body.dark .subtitle {
+  color: var(--accent);
 }
 
 .page-top {
