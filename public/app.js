@@ -4,6 +4,7 @@ const resultBlock = document.getElementById("resultBlock");
 const historyList = document.getElementById("historyList");
 const exportHistoryBtn = document.getElementById("exportHistoryBtn");
 const toggleStatsBtn = document.getElementById("toggleStatsBtn");
+const themeToggleBtn = document.getElementById("themeToggleBtn");
 const statsSection = document.getElementById("statsSection");
 
 let chart;
@@ -31,6 +32,23 @@ const FILTER_UZ = {
   MEDIUM: "O'RTA XAVF",
   "LOW RISK": "PAST XAVF"
 };
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.body.classList.toggle("dark", isDark);
+  themeToggleBtn.textContent = isDark ? "Kun rejimi" : "Tun rejimi";
+}
+
+function initTheme() {
+  const savedTheme = localStorage.getItem("theme_mode");
+  if (savedTheme === "dark" || savedTheme === "light") {
+    applyTheme(savedTheme);
+    return;
+  }
+
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(prefersDark ? "dark" : "light");
+}
 
 function formatMoney(value) {
   return new Intl.NumberFormat("uz-UZ").format(Math.round(value));
@@ -225,6 +243,12 @@ exportHistoryBtn.addEventListener("click", () => {
   window.location.href = "/api/history/export";
 });
 
+themeToggleBtn.addEventListener("click", () => {
+  const nextTheme = document.body.classList.contains("dark") ? "light" : "dark";
+  localStorage.setItem("theme_mode", nextTheme);
+  applyTheme(nextTheme);
+});
+
 toggleStatsBtn.addEventListener("click", () => {
   const isHidden = statsSection.style.display === "none";
   statsSection.style.display = isHidden ? "block" : "none";
@@ -287,3 +311,4 @@ form.addEventListener("submit", async (e) => {
 });
 
 loadHistory();
+initTheme();

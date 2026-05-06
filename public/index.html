@@ -10,8 +10,14 @@
   <body>
     <div class="container">
       <div class="page-top">
-        <h1>AI Kredit Risk Baholash Dashboard</h1>
-        <button type="button" id="toggleStatsBtn">Statistika</button>
+        <div>
+          <h1>Noaniqlik sharoitida kredit berish riskini baholash</h1>
+          <p class="subtitle">Moliyaviy profilingizni baholang va xavfsiz kredit strategiyasini tanlang.</p>
+        </div>
+        <div class="top-actions">
+          <button type="button" id="themeToggleBtn" class="ghost-btn">Tun rejimi</button>
+          <button type="button" id="toggleStatsBtn" class="ghost-btn">Statistika</button>
+        </div>
       </div>
       <div class="grid">
         <div class="card">
@@ -60,7 +66,7 @@
       <div class="card" style="margin-top:18px">
         <div class="history-top" style="margin-bottom: 10px">
           <h2 style="margin:0">Hisob-kitoblar tarixi</h2>
-          <button type="button" id="exportHistoryBtn">Excelga eksport</button>
+          <button type="button" id="exportHistoryBtn" class="ghost-btn">Excelga eksport</button>
         </div>
         <div id="historyList"></div>
       </div>
